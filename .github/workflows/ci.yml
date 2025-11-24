@@ -9,7 +9,6 @@ permissions:
 jobs:
   my_script_using_wif:
     runs-on: ubuntu-latest
-    environment: prod
     env:
       DATABRICKS_AUTH_TYPE: github-oidc
       DATABRICKS_HOST: https://dbc-61b90b72-62ae.cloud.databricks.com/
