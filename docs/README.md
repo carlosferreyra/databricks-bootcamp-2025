@@ -11,7 +11,7 @@
 - **Objetivo de Negocio:** Identificar estudiantes de alto potencial para reclutamiento, observando
   sus habilidades de resolución de problemas, aptitud técnica y nivel de participación durante los
   laboratorios prácticos.
-- **Herramientas:** Databricks Community Edition (DCE).
+- **Herramientas:** Databricks Free Edition (DFE).
 
 ## 2. Prerrequisitos y Logística
 
@@ -21,9 +21,7 @@
   1. Un dataset público de Argentina previamente validado (ej. de datos.gob.ar), guardado como un
      archivo CSV "sucio" (con datos desordenados).
   2. Una versión completa de los notebooks del laboratorio para usar como referencia ("Answer key").
-  3. Presentaciones (slides) para la Clase 1.
-  4. Notebook de demostración para la Clase 4 mostrando funciones, widgets y
-     `dbutils.notebook.run()`.
+  3. Presentaciones (slides) para la Clase 1 y la Clase 4.
 - **Nota Importante:** Las sesiones prácticas de 1 hora son _sprints_. Se proveerá a los estudiantes
   notebooks "iniciales" con instrucciones y código base (boilerplate) para asegurar que puedan
   completar las tareas principales dentro del tiempo asignado.
@@ -46,14 +44,13 @@
     - La tecnología central: Apache Spark (el motor) y Delta Lake (el formato de almacenamiento).
   - **[00:30 - 00:50] Laboratorio 0: Configuración de Cuenta (Práctica Guiada):**
     - Instructor comparte pantalla en vivo.
-    - Los estudiantes siguen los pasos para crear sus cuentas en **Databricks Community Edition
-      (DCE)**.
+    - Los estudiantes siguen los pasos para crear sus cuentas en **Databricks Free Edition (DFE)**.
     - **Identificación de Talento:** Notar qué estudiantes resuelven esto rápido y ayudan a otros en
       el chat.
   - **[00:50 - 01:00] Laboratorio 0: Tour del Workspace (Práctica Guiada):**
     - Creación del primer clúster (explicar brevemente qué es un clúster).
     - Creación y ejecución del primer notebook (%sql SELECT "Hola Mundo").
-- **Entregable:** Todos los estudiantes tienen una cuenta DCE funcional, un clúster corriendo y han
+- **Entregable:** Todos los estudiantes tienen una cuenta DFE funcional, un clúster corriendo y han
   ejecutado su primer notebook.
 
 ---
@@ -116,49 +113,36 @@
 ### **Clase 4: Producción, Costos y el “Takehome Challenge”**
 
 - **Duración**: 1 hora
-- **Objetivo:** Aprender a automatizar pipelines usando notebooks parametrizados y entender mejores
-  prácticas para código de producción en Community Edition.
+- **Objetivo:** Entender cómo llevar un proyecto a la realidad (costos/arquitectura) y lanzar el
+  desafío final de evaluación.
 - **Agenda:**
-  - **[00:00 - 00:15] Recap & Mejoras al Pipeline**
-    - **Actividad:** Repaso del pipeline construido (Bronce → Plata → Oro).
-    - **Práctica en vivo:** Refactorizar el pipeline manual en funciones reutilizables dentro del
-      notebook.
-    - **Conceptos clave:**
-      - Usar funciones Python para encapsular transformaciones (ej. `def create_bronze_table()`).
-      - Widgets de Databricks para parametrización (`dbutils.widgets.text()` para pasar argumentos).
-      - Comentarios y documentación del código.
-    - **Mensaje clave:** "Un notebook bien estructurado es más fácil de mantener y reutilizar."
-  - **[00:15 - 00:35] Laboratorio 3: Pipeline Parametrizado (Práctica)**
-    - **Paso 1:** Crear widgets en el notebook para inputs dinámicos (ej. nombre de tabla, ruta del
-      archivo).
-    - **Paso 2:** Convertir el código de Bronce/Plata/Oro en funciones parametrizadas.
-    - **Paso 3:** Ejecutar el notebook completo con diferentes parámetros para procesar datasets
-      distintos.
-    - **Paso 4:** Mostrar cómo usar `dbutils.notebook.run()` para invocar un notebook desde otro
-      (simulando orquestación básica disponible en Community Edition).
-    - **Bonus teórico (slides):** Mencionar brevemente qué son _Workflows/Jobs_ y _Delta Live
-      Tables_ en ediciones premium, sin hacer demo.
-  - **[00:35 - 00:50] Lanzamiento del "Takehome Challenge"**
+  - **[00:00 - 00:20] Recap & Demo del Pipeline (El "Gold Standard")**
+    - **Actividad:** Repaso rápido del pipeline construido en la Clase 3 (Bronce → Plata → Oro).
+    - **Enfoque:** Usar este pipeline manual como la "Demo" de lo que se espera que logren los
+      alumnos. Resaltar las mejores prácticas aplicadas (limpieza, esquema, agregación).
+    - **Mensaje clave:** "Esto funciona manualmente, pero ¿cómo escala en una empresa real?"
+  - **[00:20 - 00:40] Teoría: Arquitectura de Producción y Presupuestos**
+    - **El Salto a Premium (Teórico):** Explicar conceptualmente herramientas como _Delta Live
+      Tables_ y _Jobs_ sin depender de una demo en vivo (dadas las limitaciones de Free Edition).
+      Usar slides para mostrar la diferencia visual y operativa entre correr un notebook manual vs.
+      orquestado.
+    - **Takeaway:** En el mundo real, la ingeniería de datos no es solo código, es costo-eficiencia.
+  - **[00:40 - 00:55] Lanzamiento del "Takehome Challenge"**
     - **Concepto:** "Ahora es su turno. Mismo problema, distintos datos."
-    - **El Desafío:** Proveer un dataset diferente (usar /databricks-datasets) y pedirles que
-      repliquen la arquitectura Medallion con código modular.
+    - **El Desafío:** Proveer un dataset diferente y pedirles que repliquen la arquitectura
+      Medallion.
     - **Reglas:**
-      - Debe correr en Databricks Community Edition.
+      - Debe correr en Databricks Free Edition.
       - Debe tener las 3 capas claras (Bronze, Silver, Gold).
-      - El código debe estar organizado en funciones reutilizables.
-      - Debe usar al menos 2 widgets para parametrización.
-      - **Bonus:** Crear un notebook "orquestador" que llame al pipeline usando
-        `dbutils.notebook.run()`.
-  - **[00:50 - 01:00] Q&A y Próximos Pasos**
-    - Instrucciones de entrega (exportar notebooks como .dbc o HTML).
+      - **Bonus:** Incluir una estimación teórica de cuánto costaría correrlo diariamente (usando lo
+        aprendido en el bloque anterior).
+  - **[00:55 - 01:00] Cierre y Próximos Pasos**
+    - Instrucciones de entrega (ej. exportar notebooks como .dbc o HTML).
     - Definición del _deadline_ para el challenge.
-    - Recursos adicionales para seguir aprendiendo (documentación oficial, cursos gratuitos).
-- **Entregable:** Notebook refactorizado con funciones y widgets (demo del instructor).
+- **Entregable:** Ninguno.
 - **Identificación de Talento:**
-  - ¿Quién captó rápido el concepto de parametrización y funciones?
-  - ¿Quién experimentó con `dbutils.notebook.run()` más allá de lo mostrado?
-  - Observar la calidad del código en el "Takehome Challenge" (modularidad, documentación, manejo de
-    errores).
+  - "Takehome Challenge" lanzado oficialmente a los estudiantes.
+  - Instrucciones claras sobre la metodología de evaluación y el _deadline_.
 
 ---
 
@@ -168,8 +152,8 @@
   pero requerir análisis propio.
 - **Dataset del Challenge (Opciones):**
 
-  - **Opción A (Nativo - Recomendada):** Usar /databricks-datasets/nyctaxi (Taxis de Nueva York) o
-    /databricks-datasets/learning/flights (Vuelos).
+  - **Opción A (Nativo - Recomendada):** Usar `/databricks-datasets/nyctaxi` (Taxis de Nueva York) o
+    `/databricks-datasets/learning/flights` (Vuelos).
   - _Ventaja:_ Ya está montado en el entorno, los alumnos no necesitan subir archivos y elimina
     problemas de carga/internet.
   - **Opción B (Local):** Otro CSV de datos.gob.ar (ej. Precios cuidados o Vacunación).
@@ -179,12 +163,9 @@
 
 "Como Ingeniero de Datos Junior, se te ha asignado el dataset de **[Vuelos/Taxis]**. Tu tarea es:
 
-- **Ingestar** los datos crudos en una tabla Bronze usando Delta Lake.
+- **Ingestar** los datos crudos.
 - **Limpiarlos** eliminando registros cancelados o nulos (Capa Silver).
 - **Generar una tabla agregada** (Capa Gold) que muestre el top 10 de aerolíneas/zonas con mayor
   tráfico mensual.
-- **Modularización:** Organiza tu código en funciones reutilizables (al menos una función por capa).
-- **Parametrización:** Usa widgets de Databricks para permitir configuración dinámica (ej. ruta de
-  origen, nombre de tablas).
-- **Bonus:** Crea un segundo notebook "orquestador" que ejecute tu pipeline usando
-  `dbutils.notebook.run()` y pase los parámetros necesarios."
+- **Estimación:** Calcula el costo mensual teórico de este proceso asumiendo que tarda 30 minutos en
+  ejecutarse diariamente en un Job Cluster estándar."
